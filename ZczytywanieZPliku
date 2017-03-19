@@ -1,0 +1,46 @@
+
+package bla;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
+public class Plik {
+
+	/*
+	 * Otwarcie pliku i spisywanie kazdej linii do stringa
+	 * pozniej uzycie stringa jako kodu prograu za pomoca eval 
+	 * i zapisanie wyniku rownania ze stringa w objekcie result
+	 * dopoki linia w pliku tekstowym nie bedize rowna null
+	 */
+	
+	public void skannapis() throws FileNotFoundException, IOException, ScriptException
+	{
+		
+		String line;
+	      try (
+	          InputStream fis = new FileInputStream("blabla.txt");
+	          InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+	          BufferedReader br = new BufferedReader(isr);
+	      ) {
+	          while ((line = br.readLine()) != null) {
+	              String imie = line;
+	              ScriptEngineManager manager2 = new ScriptEngineManager();
+	    	      ScriptEngine engine2 = manager2.getEngineByName("js");
+	    	      System.out.print(imie); 
+	    	      Object result2 = engine2.eval(imie);
+	    	      
+	    	      System.out.println(" = "+result2); 
+	          }
+	      }
+	      Kalkulator.main(null);
+	}
+}
