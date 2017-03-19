@@ -1,0 +1,49 @@
+package bla;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
+public class Uzytkownik {
+
+	/*
+	 * Pobranie od uzytkownika danych do stringa,
+	 * sprawdzenie czy string = "koniec"
+	 * sprawdzenie czy pierwszy znak jest litera, 
+	 * jezeli tak, prosi o podanie danych jeszcze raz
+	 * jezeli nie, egzekwuje string ajako kod i wynik zapisuje w objekcie wynik
+	 */
+
+	public void wprowadzdane() throws ScriptException, FileNotFoundException, IOException
+	{
+		String imie = null; 
+		while( imie != "koniec")
+		{
+			System.out.println("Wprowadz dane:"); 
+	      @SuppressWarnings("resource")
+	      
+	      Scanner odczyt = new Scanner(System.in); 
+	 
+	      imie = odczyt.nextLine();
+	       String kon = new String ("koniec");
+	      
+	      if(imie.equals(kon))
+	    	 break;
+	      
+	      if(!Character.isDigit(imie.charAt(0)))
+	    	continue;
+	      
+	    	  	ScriptEngineManager manager = new ScriptEngineManager();
+	    	  	ScriptEngine engine = manager.getEngineByName("js");
+	    	  	Object result = engine.eval(imie);
+	    	  	System.out.println("Wynik "+result); 
+	    	 
+		}
+		Kalkulator.main(null);
+
+	}
+}
